@@ -130,3 +130,6 @@ Function Invoke-RestMethodFast {
 	
 	ConvertFrom-JsonFast -InputObject $Result
 }
+
+Set-Alias -Name Invoke-FastRestMethod -Value Invoke-RestMethodFast
+Set-Alias -Name ConvertFrom-FastJson -Value ConvertFrom-JsonFast

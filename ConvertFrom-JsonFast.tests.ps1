@@ -85,5 +85,18 @@ Describe "It Properly Deserializes small Json" {
         convertto-json -InputObject $result -compress | should -be $string
     }
 
+	
+    it "Alias Also Works" {
+
+        $String = "{""tom"":null}"
+        $result = ConvertFrom-FastJson -InputObject $String
+
+        $result | Should -beoftype [hashtable]
+        $result.keys.count | should -be 1
+        $result.ContainsKey("tom") | should -be $true
+        $result["tom"] | should -be $null
+
+        convertto-json -InputObject $result -compress | should -be $string
+    }
 
 }
