@@ -87,27 +87,35 @@ Function ConvertFrom-JsonFast {
 
     end {
 
-        try {
-            [void] ([JsonHelper]::Deserialize($ObjectBuffer[0], $depth))
+		# If our buffer only has one element in it we use this fast path. Otherwise the try{} catch{} block later will cause us to deserialize the object twice.
+		if ($ObjectBuffer.count -eq 1) {
+			$result = [JsonHelper]::Deserialize($ObjectBuffer[0], $depth)
+		}
+		
+		# We want to support a user passing us two discrete json objects via the pipeline where we deserialize both. So we attempt to
+		# deserialize the first object and if it works we then deserialize each object as if it is its own json object.
+		else {	
+			try {
+				[void] ([JsonHelper]::Deserialize($ObjectBuffer[0], $depth))
 
-            $Result = @(foreach ($item in $ObjectBuffer) {
-                [JsonHelper]::Deserialize($item, $depth)
-            })
-        } catch {
-            $Result = [JsonHelper]::Deserialize([string]::join("`n",$ObjectBuffer.ToArray()), $depth)
-        }
+				$Result = @(foreach ($item in $ObjectBuffer) {
+					[JsonHelper]::Deserialize($item, $depth)
+				})
+			} catch {
+				# If that fails we just take the whole input, concatenate it, and pass it to the parser.
+				$Result = [JsonHelper]::Deserialize([string]::join("`n",$ObjectBuffer.ToArray()), $depth)
+			}
+		}
 
-        if ($NoEnumerate) { 
+		# The noenumerate flag allows the returning of an array without unpacking it.
+        if ($NoEnumerate) {
+			# We have to force return an array otherwise powershell will collapse a one element array
             if ($Result -is [array]) {
                 return @(,$result)
             }
-            return $result
         }
-        else {
-            foreach ($item in @($Result)) {
-                write-output $item
-            }
-        }
+        
+        return $result
     }
 }
 
@@ -125,6 +133,8 @@ Function Invoke-RestMethodFast {
     .NOTES
     Supports any additional parameters that invoke-webrequest supports. Will only work with JSON, does not work with XML
     #>
+	
+	# Proxy all of the parameters to invoke-webrequest so that this can be a drop-in for invoke-restmethod
 	$params = $MyInvocation.UnboundArguments
 	$result = Invoke-WebRequest @params
 	
