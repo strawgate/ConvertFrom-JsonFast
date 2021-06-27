@@ -1,6 +1,9 @@
 # ConvertFrom-JsonFast
 A significantly faster and more memory efficient implementation of ConvertFrom-Json and Invoke-RestMethod
 
+Github: https://github.com/strawgate/ConvertFrom-JsonFast
+Powershell Gallery: https://www.powershellgallery.com/packages/ConvertFrom-JsonFast
+
 # Purpose
 This module introduces two new functions with partial compability with their namesake functions. These functions consume 1/2 as much memory and have runtime performance 5-6x faster as their namesake functions.
 
