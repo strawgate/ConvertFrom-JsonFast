@@ -9,7 +9,6 @@ Powershell Gallery: https://www.powershellgallery.com/packages/ConvertFrom-JsonF
 This module introduces two new functions with partial compability with their namesake functions. These functions consume 1/2 as much memory and have runtime performance 5-6x faster as their namesake functions.
 
 # Disadvantages
-This module does not support -depth for convertfrom-json.
 This module does not fully implement invoke-restmethod, it simply calls invoke-webrequest and casts the response using the convertfrom-jsonfast cmdlet.
 This module has different handling of special formats like dates
 This module may have different number handling (int32 vs int64 vs double vs float) than the original module
