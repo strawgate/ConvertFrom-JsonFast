@@ -1,5 +1,3 @@
-[Reflection.Assembly]::LoadFile("C:\Program Files\PowerShell\7\Newtonsoft.Json.dll")
-
 Add-Type -TypeDefinition @"
 using System.Collections;
 using System.Linq;
@@ -52,15 +50,43 @@ public static class JsonHelper
 "@ -ReferencedAssemblies netstandard,System.Collections,System.Linq,System,System.IO,System.Text.Json,Newtonsoft.Json,System.Memory
 
 Function ConvertFrom-JsonFast {
+    <#
+    .SYNOPSIS
+    Converts a json string to a real object
+    
+    .DESCRIPTION
+    Converts a json string to a real object
+    
+    .PARAMETER InputObject
+    The string of json to convert
+    
+    .EXAMPLE
+    ConvertFrom-JsonFast -InputObject "{""Tom"": 5}"
+    
+    .NOTES
+    Objects will be returned as Hashtables and not as pscustomobjects
+    #>
 	param (
-		$InputObject,
-        $AsHashtable
+		$InputObject
 	)
 	
 	[JsonHelper]::Deserialize($InputObject)
 }
 
 Function Invoke-RestMethodFast {
+    <#
+    .SYNOPSIS
+    Connects to a remote host and returns the content of the body casted to objects
+    
+    .DESCRIPTION
+    Connects to a remote host and returns the content of the body casted to objects
+    
+    .EXAMPLE
+    Invoke-RestMethodfast -Uri https://jsonplaceholder.typicode.com/todos/1
+    
+    .NOTES
+    Supports any additional parameters that invoke-webrequest supports. Will only work with JSON, does not work with XML
+    #>
 	$params = $MyInvocation.UnboundArguments
 	$result = Invoke-WebRequest @params
 	
