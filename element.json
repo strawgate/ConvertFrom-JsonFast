@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "60d7cf3b412f09da455bb40e",
+    "index": 0,
+    "guid": "e6706e10-ea2a-4f7f-bebb-89c0bfedd561",
+    "isActive": true,
+    "balance": "$3,697.44",
+    "picture": "http://placehold.it/32x32",
+    "age": 32,
+    "eyeColor": "blue",
+    "name": "Willie Valdez",
+    "gender": "female",
+    "company": "PYRAMIA",
+    "email": "willievaldez@pyramia.com",
+    "phone": "+1 (961) 462-3367",
+    "address": "565 Hill Street, Interlochen, Federated States Of Micronesia, 7021",
+    "about": "Culpa consequat irure aliquip fugiat laboris minim consequat. Proident cillum ex ut labore. Cupidatat voluptate irure ad dolor laboris dolor voluptate aliqua tempor anim do adipisicing. Labore esse minim cillum esse pariatur nulla fugiat ut. Excepteur minim esse voluptate nulla laborum.\r\n",
+    "registered": "2021-06-18T03:24:57 +05:00",
+    "latitude": -7.673777,
+    "longitude": -93.128327,
+    "tags": [
+      "est",
+      "nulla",
+      "ullamco",
+      "elit",
+      "est",
+      "adipisicing",
+      "deserunt"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Kathrine Chang"
+      },
+      {
+        "id": 1,
+        "name": "Marisa Holmes"
+      },
+      {
+        "id": 2,
+        "name": "Stacie Shepard"
+      }
+    ],
+    "greeting": "Hello, Willie Valdez! You have 10 unread messages.",
+    "favoriteFruit": "banana"
+  }
+]
