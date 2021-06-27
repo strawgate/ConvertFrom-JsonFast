@@ -2,6 +2,7 @@
 A significantly faster and more memory efficient implementation of ConvertFrom-Json and Invoke-RestMethod
 
 Github: https://github.com/strawgate/ConvertFrom-JsonFast
+
 Powershell Gallery: https://www.powershellgallery.com/packages/ConvertFrom-JsonFast
 
 # Purpose
