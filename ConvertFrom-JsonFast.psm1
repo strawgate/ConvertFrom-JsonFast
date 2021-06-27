@@ -1,8 +1,8 @@
 Add-Type -TypeDefinition @"
-using System.Collections;
-using System.Linq;
 using System;
 using System.IO;
+using System.Linq;
+using System.Collections;
 using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,9 +24,9 @@ public static class JsonHelper
             case JsonValueKind.Object:
                 var Properties = element.EnumerateObject();
 
-                return Properties.ToDictionary(prop => prop.Name,
+                return new Hashtable(Properties.ToDictionary(prop => prop.Name,
                     prop => ToObject(prop.Value)
-                );
+                ));
             case JsonValueKind.Array:
                 var Entries = element.EnumerateArray();
 
