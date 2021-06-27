@@ -9,9 +9,13 @@ using Newtonsoft.Json.Linq;
 
 public static class JsonHelper
 {
-    public static object Deserialize(string json)
+    public static object Deserialize(string json, Int32 depth)
     {
-        JsonDocument thisDocument = JsonDocument.Parse(json);
+        JsonDocumentOptions options = new JsonDocumentOptions();
+
+        options.MaxDepth = depth;
+
+        JsonDocument thisDocument = JsonDocument.Parse(json, options);
 
         return ToObject(thisDocument.RootElement);
     }
@@ -67,10 +71,44 @@ Function ConvertFrom-JsonFast {
     Objects will be returned as Hashtables and not as pscustomobjects
     #>
 	param (
-		$InputObject
+        [Parameter(ValuefromPipeline=$True)]
+		$InputObject,
+        [int] $Depth = 1024,
+        [switch] $AsHashtable,
+        [switch] $NoEnumerate
 	)
-	
-	[JsonHelper]::Deserialize($InputObject)
+	begin {
+        $ObjectBuffer = [System.Collections.ArrayList]::new()
+    }
+
+    process {
+    	[void] $ObjectBuffer.Add($InputObject)
+    }
+
+    end {
+
+        try {
+            [void] ([JsonHelper]::Deserialize($ObjectBuffer[0], $depth))
+
+            $Result = @(foreach ($item in $ObjectBuffer) {
+                [JsonHelper]::Deserialize($item, $depth)
+            })
+        } catch {
+            $Result = [JsonHelper]::Deserialize([string]::join("`n",$ObjectBuffer.ToArray()), $depth)
+        }
+
+        if ($NoEnumerate) { 
+            if ($Result -is [array]) {
+                return @(,$result)
+            }
+            return $result
+        }
+        else {
+            foreach ($item in @($Result)) {
+                write-output $item
+            }
+        }
+    }
 }
 
 Function Invoke-RestMethodFast {
