@@ -9,7 +9,7 @@ Powershell Gallery: https://www.powershellgallery.com/packages/ConvertFrom-JsonF
 This module introduces two new functions with partial compability with their namesake functions. These functions consume 1/2 as much memory and have runtime performance 5-6x faster as their namesake functions.
 
 # Compatibility
-This module currently achieves 216/224 tests when the ConvertFrom-Json tests are run against it. The 8 failing tests are:
+This module currently achieves 216/224 tests when the ConvertFrom-Json tests are run against it. The 8 failing tests are related to the exact exceptions thrown in certain edge cases:
 
 ```
     [-] Fails to convert an object of depth higher than 1024 by default with AsHashtable switch set to $true 42ms
