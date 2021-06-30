@@ -143,3 +143,5 @@ Function Invoke-RestMethodFast {
 
 Set-Alias -Name Invoke-FastRestMethod -Value Invoke-RestMethodFast
 Set-Alias -Name ConvertFrom-FastJson -Value ConvertFrom-JsonFast
+
+Export-ModuleMember -Function * -alias *

@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-# RootModule = ''
+RootModule = 'ConvertFrom-JsonFast.psm1'
 
 # Version number of this module.
 ModuleVersion = '1.0.3'
@@ -33,7 +33,7 @@ Copyright = '(c) 2021 William Easton. All rights reserved.'
 Description = 'A significantly faster and more memory efficient implementation of ConvertFrom-Json and Invoke-RestMethod'
 
 # Minimum version of the PowerShell engine required by this module
-# PowerShellVersion = ''
+PowerShellVersion = '7.1.0'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
@@ -69,7 +69,7 @@ Description = 'A significantly faster and more memory efficient implementation o
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @()
+FunctionsToExport = 'convertfrom-jsonfast', 'invoke-restmethodfast'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
@@ -78,7 +78,7 @@ CmdletsToExport = @()
 VariablesToExport = '*'
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = @()
+AliasesToExport = @("convertfrom-fastjson","invoke-fastrestmethod")
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()
